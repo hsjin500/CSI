@@ -96,7 +96,7 @@ public class UISignup extends javax.swing.JFrame {
 		
 		animation2.setBackground(new java.awt.Color(255, 255, 255));
         animation2.setIcon(new javax.swing.ImageIcon("src\\pack2\\robber0.png")); // NOI18N
-        jPanel1.add(animation2, new pack2.AbsoluteConstraints(1013, 380, 320, 262));
+        jPanel1.add(animation2, new pack2.AbsoluteConstraints(1013, 355, 320, 262));
 		animation2.setVisible(true);
         
 		closeFunction.setIcon(new javax.swing.ImageIcon("src\\pack2\\close_before.png")); // NOI18N

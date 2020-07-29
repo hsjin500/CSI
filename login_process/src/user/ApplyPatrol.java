@@ -3,6 +3,7 @@ package user;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -18,11 +19,12 @@ import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ApplyPatrol extends JFrame {
+public class ApplyPatrol {
 
+	private JFrame frame;
 	private JPanel contentPane;
 	private JTextField donotusethisTextField;
-
+    
 	/**
 	 * Launch the application.
 	 */
@@ -30,29 +32,31 @@ public class ApplyPatrol extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ApplyPatrol frame = new ApplyPatrol();
-					frame.setVisible(true);
+					ApplyPatrol window = new ApplyPatrol();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}
+	} 
 
 	/**
 	 * Create the frame.
 	 */
+	
 	public ApplyPatrol() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		frame.setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		setTitle("방범대 지원");
+		frame.setTitle("방범대 지원");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+		frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
 
 		JTextField numberTextField = new JTextField();
 		numberTextField.addFocusListener(new FocusAdapter() {
@@ -71,14 +75,20 @@ public class ApplyPatrol extends JFrame {
 
 		JButton confirmBtn = new JButton("\uD655\uC778");
 		confirmBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "승인은 3일정도 소요됩니다.", "방범대 지원", JOptionPane.INFORMATION_MESSAGE);
+				frame.dispose();
 			}
 		});
 		confirmBtn.setBounds(71, 185, 112, 46);
 		contentPane.add(confirmBtn);
 
 		JButton BackBtn = new JButton("\uB4A4\uB85C\uAC00\uAE30");
+		BackBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
 		BackBtn.setBounds(259, 185, 112, 46);
 		contentPane.add(BackBtn);
 		
