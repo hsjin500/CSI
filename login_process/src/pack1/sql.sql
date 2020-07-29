@@ -23,6 +23,4 @@ id_number varchar2(15) not null,
 constraint temp_pk primary key(temp_id),
 constraint temp_fk foreign key(temp_id) references clients(client_id)
 )
-
 ---------
-select * from clients where client_id = 'csi12345'

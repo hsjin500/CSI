@@ -15,7 +15,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -561,8 +560,8 @@ public class UISignup extends javax.swing.JFrame {
 				CheckLogin cl = new CheckLogin();
 				if (check && !cl.checkId(id)) {//검색해서 있으면 true 즉, !false --> 검색해서 없는것(중복아님)
 					// 맞으면 데이터 insert
-					String sql = "insert into clients(client_id, client_pw, client_name, phone_number, client_email, signup_date) "
-							+ "values('" + id + "', '" + pw + "', '" + name + "','" + phoneNumber + "' , '" + email	+ "', sysdate)";
+					String sql = "insert into clients(client_id, client_pw, client_name, phone_number, client_email, signup_date, guard) "
+							+ "values('" + id + "', '" + pw + "', '" + name + "','" + phoneNumber + "' , '" + email	+ "', sysdate, '0')";
 					System.out.println(sql);
 					DBDAO.executeSqlUpdate(sql);
 
@@ -590,27 +589,21 @@ public class UISignup extends javax.swing.JFrame {
 		DBDAO.init();
 		CheckLogin cl = new CheckLogin();
 		boolean check = cl.checkIdPw(id, pw);
-		String sql = "select * from clients where client_id = 'csi12345' ";
-		ResultSet rs = DBDAO.getResultSet(sql) ;
+		loginDistrubution ld = new loginDistrubution();
 		if(check) {
 			System.out.println("로그인 성공");
-			JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
 			
-			this.dispose();//로그인 성공했기 때문에 창 지운다.
-			try {
 				if(id.equals("admin")) {
-					//관리자 전용 클래스(화면)로 넘어가게
+					//관리자 전용 클래스(화면)로 넘어가게 생성자 추가
 					JOptionPane.showMessageDialog(null, "관리자님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
-				}else if(rs.getString("guard").equals("1")) {
+				}else if(ld.isGuard(id)) {
 					//방범대 전용 클래스(화면)로 넘어가게
 					JOptionPane.showMessageDialog(null, "방범대원님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					//일반인 전용 클래스(화면)로 넘어가게
-					JOptionPane.showMessageDialog(null, rs.getString("client_name")+"님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, ld.userName(id)+"님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
 				}
-			}catch(SQLException e) {
-				
-			}
+			this.dispose();//로그인 성공했기 때문에 창 지운다.
 //----------------------------------로그인 실패시---------------------------			
 		}else {
 			System.out.println("로그인 실패");
