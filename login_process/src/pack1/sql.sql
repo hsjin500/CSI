@@ -14,4 +14,4 @@ manager varchar2(7),
 constraint client_id_pk primary key(client_id)
 )
 
-insert into clients VALUES ('hsjin500', 'hsjin500', '全己柳', '01011112222', 'imsun0101@naver.com',sysdate)
+insert into clients VALUES ('hsjin200', 'hsjin200', '全己柳', '01011112222', 'imsun0101@naver.com',sysdate)
