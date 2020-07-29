@@ -16,7 +16,7 @@ public class DBDAO {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			String url = "jdbc:oracle:thin:@183.105.48.166:1521:xe"; // 프로토콜
+			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // 프로토콜
 			String user_id = "temp";
 			String pw = "12345";
 

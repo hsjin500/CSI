@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class CheckLogin {
 	
 	public boolean checkId(String id) {//회원가입시 아이디 중복확인 할때 사용.
-		String sql = "SELECT * FROM STUDENTS WHERE Student_ID = '" + id + "' ";
+		String sql = "SELECT * FROM clients WHERE client_ID = '" + id + "' ";
 		ResultSet rs = DBDAO.getResultSet(sql);
 		
 		try {
@@ -23,8 +23,8 @@ public class CheckLogin {
 	}
 
 	public boolean checkIdPw(String id, String pw) {
-		String sql = "SELECT * FROM STUDENTS WHERE Student_ID = '" + id + "' "
-					+ "AND PW = '" + pw + "' " ;
+		String sql = "SELECT * FROM clients WHERE client_ID = '" + id + "' "
+					+ "AND client_pw = '" + pw + "' " ;
 //		System.out.println(sql);
 		ResultSet rs = DBDAO.getResultSet(sql);
 		

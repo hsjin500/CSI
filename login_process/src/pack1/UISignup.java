@@ -560,7 +560,7 @@ public class UISignup extends javax.swing.JFrame {
 				CheckLogin cl = new CheckLogin();
 				if (check && !cl.checkId(id)) {//검색해서 있으면 true 즉, !false --> 검색해서 없는것(중복아님)
 					// 맞으면 데이터 insert
-					String sql = "insert into students(Student_id, pw, student_name, phone_number, student_email, signup_date) "
+					String sql = "insert into clients(client_id, client_pw, client_name, phone_number, client_email, signup_date) "
 							+ "values('" + id + "', '" + pw + "', '" + name + "','" + phoneNumber + "' , '" + email	+ "', sysdate)";
 					System.out.println(sql);
 					DBDAO.executeSqlUpdate(sql);

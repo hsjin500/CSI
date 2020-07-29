@@ -1,15 +1,17 @@
-select * from students
+select * from clients
 
---drop table students
+--drop table clients
 
-create table students (
-student_id varchar(12) not null,
-pw varchar(15) not null,
-student_name varchar(30) not null,
-phone_number varchar(30),
-student_email varchar(50) not null,
+create table clients (
+client_id varchar2(12) not null,
+client_pw varchar2(15) not null,
+client_name varchar2(30) not null,
+phone_number varchar2(30) not null,
+client_email varchar2(50) not null,
 signup_date date,
-constraint student_id_pk primary key(student_id)
+guard varchar2(3),
+manager varchar2(7),
+constraint client_id_pk primary key(client_id)
 )
 
-insert into students VALUES ('14', '123', '全己柳', '01046085062', 'imsun0101@naver.com',sysdate)
+insert into clients VALUES ('hsjin500', 'hsjin500', '全己柳', '01011112222', 'imsun0101@naver.com',sysdate)
