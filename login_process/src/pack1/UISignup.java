@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -589,14 +590,28 @@ public class UISignup extends javax.swing.JFrame {
 		DBDAO.init();
 		CheckLogin cl = new CheckLogin();
 		boolean check = cl.checkIdPw(id, pw);
+		String sql = "select * from clients where client_id = 'csi12345' ";
+		ResultSet rs = DBDAO.getResultSet(sql) ;
 		if(check) {
 			System.out.println("로그인 성공");
 			JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
-			//맞으면 다음 실행 할(메소드)(기능) 실행
-			//!@#!#@!@#생성자();
-			this.dispose();//로그인 성공했기 때문에 창 지운다.//.visible(false);라는 잠시 안보이게 하는 기능 있으나 로그인 창은 다시 필요 없으니 지운다. 
-//setvisible기능은 메모장같이 new로 생성했는데 지웠다가 키면 계속 새로운 객체가 생성이 되니
-//setvisible을 사용하여 보였다 안보였다 하는 것도 방법중 하나이다.
+			
+			this.dispose();//로그인 성공했기 때문에 창 지운다.
+			try {
+				if(id.equals("admin")) {
+					//관리자 전용 클래스(화면)로 넘어가게
+					JOptionPane.showMessageDialog(null, "관리자님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
+				}else if(rs.getString("guard").equals("1")) {
+					//방범대 전용 클래스(화면)로 넘어가게
+					JOptionPane.showMessageDialog(null, "방범대원님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					//일반인 전용 클래스(화면)로 넘어가게
+					JOptionPane.showMessageDialog(null, rs.getString("client_name")+"님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}catch(SQLException e) {
+				
+			}
+//----------------------------------로그인 실패시---------------------------			
 		}else {
 			System.out.println("로그인 실패");
 			JOptionPane.showMessageDialog(null ,"로그인 실패", "로그인", JOptionPane.ERROR_MESSAGE);
