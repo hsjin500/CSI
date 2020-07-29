@@ -15,3 +15,5 @@ constraint client_id_pk primary key(client_id)
 )
 
 insert into clients VALUES ('csi1234', 'csi1234', 'È«¼ºÁø', '01011112222', 'imsun0101@naver.com', sysdate, null, null )
+
+---------
