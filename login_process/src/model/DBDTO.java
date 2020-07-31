@@ -18,6 +18,10 @@ public class DBDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public void setGuard(String guard) {
+		this.guard = guard;
+	}
 
 
 	public DBDTO(String id, String pw, String name, String phone, String email, String ssnum, String guard,

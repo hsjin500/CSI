@@ -116,15 +116,22 @@ public class c_main {
       JButton btnNewButton_1 = new JButton("\uBC29\uBC94\uB300 \uC9C0\uC6D0\uD558\uAE30");
       btnNewButton_1.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-//        	  0은 대기, 1은 거절  // 승인하면 temp에서 행 삭제
-//        	 if(temp테이블에 history가 1이면 ) {
-//        		 JOptionPane.showMessageDialog(null, "거절당한사람");
-//        	 }else if(temp테이블 history가 0이면){
-//        	 JOptionPane.showMessageDialog(null, "승인대기중");
-//         }else{
-        	 frame.dispose();
-        	 ApplyPatrol applypatrol = new ApplyPatrol(dto);
-//         }
+        	  String id = dto.getId();
+             
+             DBDAO dao = new DBDAO();
+//              0은 대기, 1은 거절  // 승인하면 temp에서 행 삭제
+             
+             if(dao.tempHistory(id).equals("0")) {
+                  JOptionPane.showMessageDialog(null, "승인대기 중입니다.", "정보", JOptionPane.INFORMATION_MESSAGE);
+
+                
+             }else if(dao.tempHistory(id).equals("1")) {
+                  JOptionPane.showMessageDialog(null, "이미 거절되었습니다.", "정보", JOptionPane.INFORMATION_MESSAGE);
+
+             }else {
+                frame.dispose();
+                 ApplyPatrol applypatrol = new ApplyPatrol(dto);
+             }
          }
       });
       btnNewButton_1.setBackground(Color.WHITE);

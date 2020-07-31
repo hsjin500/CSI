@@ -102,6 +102,7 @@ public class ApplyPatrol {
 		            String id =id_textField.getText();
 		            String ssnum = numberTextField.getText();
 		            String guard = location;
+		            
 		      
 		            if(!guard.equals("0")) {
 		            	cnt = dao.apply(id,ssnum,guard);

@@ -450,4 +450,145 @@ public class DBDAO {
 			}
 			return arr;
 		}
+	   
+	   public String tempHistory(String id) {
+
+		      init();
+		      temp_DTO dto = null;
+		      String h = "";
+		      try {
+		         String sql = "select * from temp where temp_id=?";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, id);
+
+		         rs = pstmt.executeQuery();
+		         while (rs.next()) {
+		            String temp_id = rs.getNString(1);
+		            String ssnum = rs.getNString(2);
+		            String guard = rs.getNString(3);
+		            String history = rs.getNString(4);
+
+		            dto = new temp_DTO(temp_id, ssnum, guard, history);
+		            h = dto.getHistory();
+		         }
+
+		      } catch (SQLException e) {
+		         // TODO Auto-generated catch block
+		         e.printStackTrace();
+		      } finally {
+		         close();
+		      }
+		      return h;
+		   }
+	   
+	   public ArrayList<temp_DTO> gaipAll() {
+			ArrayList<temp_DTO> gaipList = new ArrayList<temp_DTO>();
+			init();
+			String sql = "select * from temp";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					String id = rs.getString(1);
+					String ssnum = rs.getString(2);
+					String guard = rs.getString(3);
+					String history = rs.getString(4);
+
+					gaipList.add(new temp_DTO(id, ssnum, guard, history));
+				}
+			} catch (SQLException e) {
+			}
+			return gaipList;
+		}
+	   
+	   public int deleteFromTemp(String id) {
+			int cnt = 0;
+			init();
+			try {
+				String sql = "delete from temp where temp_id = '" + id + "' ";
+
+				pstmt = conn.prepareStatement(sql);
+
+				cnt = pstmt.executeUpdate();
+
+				System.out.println("--삭제 완료--");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+
+			return cnt;
+		}
+	   
+	   public int h_modify(String id) {
+			int cnt = 0;
+
+			init();
+			String sql = "update temp set history = '1' where temp_id = ?  ";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				cnt = pstmt.executeUpdate();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return cnt;
+		}
+	   
+	   public int guard_update(String id, String guard) {
+			int cnt = 0;
+
+			init();
+			String sql = "update clients set guard = ? where client_id = ?  ";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, guard);
+				pstmt.setString(2, id);
+				cnt = pstmt.executeUpdate();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return cnt;
+		}
+	   
+	   public static String tempGuard(String id) {
+
+		      init();
+		      temp_DTO dto = null;
+		      String h = "";
+		      try {
+		         String sql = "select * from temp where temp_id = '"+id+"'";
+		         pstmt = conn.prepareStatement(sql);
+
+		         rs = pstmt.executeQuery();
+		         while (rs.next()) {
+		            String temp_id = rs.getNString(1);
+		            String ssnum = rs.getNString(2);
+		            String guard = rs.getNString(3);
+		            String history = rs.getNString(4);
+
+		            dto = new temp_DTO(temp_id, ssnum, guard, history);
+		            h = dto.getGuard();
+		         }
+
+		      } catch (SQLException e) {
+		         // TODO Auto-generated catch block
+		         e.printStackTrace();
+		      } finally {
+		    	  
+		      }
+		      return h;
+		   }
 }

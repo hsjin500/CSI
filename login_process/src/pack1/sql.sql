@@ -1,4 +1,7 @@
 select * from clients
+select * from temp
+select * from mia
+select * from request
 
 drop table request
 drop table temp
@@ -35,6 +38,7 @@ insert into location values ('관리자','관리자','주소')
 insert into mia values ('hsjin500', '봉선동','오후 7시 20분', '7월1일', '이름은 김미아 이고 나이는 4살이고 머리는 단발이에요 부탁드립니다...','없음',sysdate)
 -----------수정---------UPDATE 테이블명 SET 필드명='변경할값' WHERE 필드명=해당값;
 update clients set guard = '관리자' where client_id = 'admin'
+update temp set history = '1' where temp_id = 'hsjin200'
 ------temp 테이블 생성----
 create table temp(
 temp_id varchar2(12) not null,

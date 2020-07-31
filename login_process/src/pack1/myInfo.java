@@ -67,19 +67,19 @@ public class myInfo {
 
       JLabel lblNewLabel = new JLabel("\uB098\uC758 \uC815\uBCF4");
       lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-      lblNewLabel.setBounds(12, 9, 194, 36);
+      lblNewLabel.setBounds(12, 12, 194, 36);
       frame.getContentPane().add(lblNewLabel);
       
       JLabel lblNewLabel_1 = new JLabel("\uC544\uC774\uB514");
-      lblNewLabel_1.setBounds(28, 59, 40, 30);
+      lblNewLabel_1.setBounds(28, 60, 40, 30);
       frame.getContentPane().add(lblNewLabel_1);
       
       JLabel label = new JLabel("\uC774\uB984");
-      label.setBounds(28, 98, 30, 30);
+      label.setBounds(28, 102, 30, 30);
       frame.getContentPane().add(label);
       
       JLabel label_1 = new JLabel("\uC774\uBA54\uC77C");
-      label_1.setBounds(28, 137, 40, 30);
+      label_1.setBounds(28, 144, 40, 30);
       frame.getContentPane().add(label_1);
       
       JButton btnNewButton = new JButton("\uC774 \uC804");
@@ -90,45 +90,45 @@ public class myInfo {
          }
       });
             
-      btnNewButton.setBounds(71, 265, 97, 30);
+      btnNewButton.setBounds(60, 263, 97, 30);
       frame.getContentPane().add(btnNewButton);
       
       JLabel label_2 = new JLabel("\uC804\uD654\uBC88\uD638");
-      label_2.setBounds(28, 176, 54, 30);
+      label_2.setBounds(28, 186, 54, 30);
       frame.getContentPane().add(label_2);
       
       JLabel label_3 = new JLabel("\uC18C \uC18D");
-      label_3.setBounds(28, 215, 36, 23);
+      label_3.setBounds(28, 228, 36, 23);
       frame.getContentPane().add(label_3);
       
       id_text = new JTextField();
       id_text.setEditable(false);
-      id_text.setBounds(93, 64, 113, 21);
+      id_text.setBounds(93, 63, 113, 25);
       frame.getContentPane().add(id_text);
       id_text.setColumns(10);
       
       name_text = new JTextField();
       name_text.setEditable(false);
       name_text.setColumns(10);
-      name_text.setBounds(93, 103, 113, 21);
+      name_text.setBounds(93, 105, 113, 25);
       frame.getContentPane().add(name_text);
       
       email_text = new JTextField();
       email_text.setEditable(false);
       email_text.setColumns(10);
-      email_text.setBounds(93, 142, 113, 21);
+      email_text.setBounds(93, 147, 113, 25);
       frame.getContentPane().add(email_text);
       
       num_text = new JTextField();
       num_text.setEditable(false);
       num_text.setColumns(10);
-      num_text.setBounds(94, 181, 113, 21);
+      num_text.setBounds(93, 189, 113, 25);
       frame.getContentPane().add(num_text);
       
       sosok = new JTextField();
       sosok.setEditable(false);
       sosok.setColumns(10);
-      sosok.setBounds(93, 216, 113, 21);
+      sosok.setBounds(93, 227, 113, 25);
       frame.getContentPane().add(sosok);
       
       if(dto == null) {
