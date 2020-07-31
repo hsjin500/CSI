@@ -1,5 +1,6 @@
 package pack1;
 
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -10,16 +11,19 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import model.DBDAO;
 import model.DBDTO;
 
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
+
 
 public class mia {
 
@@ -29,7 +33,8 @@ public class mia {
    private JTextField textField_2;
    private JTextField textField_3;
    private JTextField textField_4;
-
+   private JTextField textField_5;
+   DBDAO dao = new DBDAO();
    /**
     * Launch the application.
     */
@@ -88,6 +93,8 @@ public class mia {
               JFileChooser chooser = new JFileChooser();
                if (JFileChooser.APPROVE_OPTION == chooser.showOpenDialog(null)) {
                   lblNewLabel_3.setIcon(new ImageIcon(chooser.getSelectedFile().getAbsolutePath()));
+                  String a = chooser.getSelectedFile().getAbsolutePath();
+                  textField.setText(a);
             }
          }
       });
@@ -96,23 +103,9 @@ public class mia {
       frame.getContentPane().add(btnNewButton);
       
       textField = new JTextField();
-      textField.setBounds(36, 153, 238, 28);
+      textField.setBounds(36, 153, 229, 28);
       frame.getContentPane().add(textField);
       textField.setColumns(10);
-      
-      JButton btnNewButton_1 = new JButton("\uD655\uC778");
-      btnNewButton_1.setBackground(Color.WHITE);
-      btnNewButton_1.setForeground(Color.BLACK);
-      btnNewButton_1.setFont(new Font("굴림", Font.BOLD, 13));
-      btnNewButton_1.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            frame.dispose();
-            c_main cm = new c_main(dto);
-            
-         }
-      });
-      btnNewButton_1.setBounds(234, 440, 97, 23);
-      frame.getContentPane().add(btnNewButton_1);
       
       JLabel label = new JLabel("\uC774\uBBF8\uC9C0 \uC5C5\uB85C\uB4DC");
       label.setFont(new Font("굴림", Font.BOLD, 18));
@@ -136,13 +129,6 @@ public class mia {
       button.setBackground(Color.WHITE);
       button.setBounds(368, 440, 97, 23);
       frame.getContentPane().add(button);
-
-      
-      JTextArea textArea = new JTextArea();
-      textArea.setLineWrap(true);
-      textArea.setBackground(Color.WHITE);
-      textArea.setBounds(365, 290, 296, 103);
-      frame.getContentPane().add(textArea);
       
       JLabel lblNewLabel_1 = new JLabel("ex)\uC778\uC0C1\uCC29\uC758 \uBC0F \uD2B9\uC774\uC0AC\uD56D \uB4F1");
       lblNewLabel_1.setForeground(new Color(102, 0, 0));
@@ -195,6 +181,40 @@ public class mia {
       label_5.setFont(new Font("굴림", Font.BOLD, 18));
       label_5.setBounds(432, 18, 97, 43);
       frame.getContentPane().add(label_5);
+      
+      textField_5 = new JTextField();
+      textField_5.setBounds(368, 295, 233, 124);
+      frame.getContentPane().add(textField_5);
+      textField_5.setColumns(10);
+      
+      JButton button_1 = new JButton("\uD655\uC778");
+      button_1.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            
+             String id = textField_1.getText();
+             String time = textField_4.getText();
+             String date = textField_3.getText();
+             String location = textField_2.getText();
+             String ask = textField_5.getText();
+             String photo = textField.getText();
+             
+             int cnt = dao.mia(id, location, date, time, ask, photo);
+            
+             if (cnt!=0) {
+                JOptionPane.showMessageDialog(null, " 접수 완료 " );
+                  frame.dispose();
+                  c_main m = new c_main(dto);
+             }else {
+                JOptionPane.showMessageDialog(null, "정확하게 입력해 주세요.", "오류", JOptionPane.INFORMATION_MESSAGE);
+             }
+            
+         }
+      });
+      button_1.setForeground(Color.BLACK);
+      button_1.setFont(new Font("굴림", Font.BOLD, 13));
+      button_1.setBackground(Color.WHITE);
+      button_1.setBounds(251, 440, 97, 23);
+      frame.getContentPane().add(button_1);
       
    }
 }

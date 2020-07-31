@@ -102,31 +102,31 @@ public class myInfo {
       frame.getContentPane().add(label_3);
       
       id_text = new JTextField();
-      id_text.setEnabled(false);
+      id_text.setEditable(false);
       id_text.setBounds(93, 64, 113, 21);
       frame.getContentPane().add(id_text);
       id_text.setColumns(10);
       
       name_text = new JTextField();
-      name_text.setEnabled(false);
+      name_text.setEditable(false);
       name_text.setColumns(10);
       name_text.setBounds(93, 103, 113, 21);
       frame.getContentPane().add(name_text);
       
       email_text = new JTextField();
-      email_text.setEnabled(false);
+      email_text.setEditable(false);
       email_text.setColumns(10);
       email_text.setBounds(93, 142, 113, 21);
       frame.getContentPane().add(email_text);
       
       num_text = new JTextField();
-      num_text.setEnabled(false);
+      num_text.setEditable(false);
       num_text.setColumns(10);
       num_text.setBounds(94, 181, 113, 21);
       frame.getContentPane().add(num_text);
       
       sosok = new JTextField();
-      sosok.setEnabled(false);
+      sosok.setEditable(false);
       sosok.setColumns(10);
       sosok.setBounds(93, 216, 113, 21);
       frame.getContentPane().add(sosok);

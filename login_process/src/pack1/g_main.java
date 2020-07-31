@@ -61,18 +61,21 @@ public class g_main {
 		frame.setBounds(100, 100, 422, 598);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		
-		frame.setTitle("방범대_메인");
-	    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-	    frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-		
+
+		if (dto.getGuard().equals("관리자")) {
+			frame.setTitle("관리자 메인화면");
+		} else {
+			frame.setTitle("방범대 메인화면");
+		}
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+
 		JLabel lblNewLabel = new JLabel("WELCOME GUARD");
 		lblNewLabel.setFont(new Font("Book Antiqua", Font.BOLD, 30));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(61, 27, 291, 43);
 		frame.getContentPane().add(lblNewLabel);
-		
+
 		JButton btnNewButton_2 = new JButton("LOGOUT");
 		btnNewButton_2.setBackground(Color.WHITE);
 		btnNewButton_2.setForeground(Color.DARK_GRAY);
@@ -86,7 +89,7 @@ public class g_main {
 		btnNewButton_2.setFont(new Font("Book Antiqua", Font.BOLD | Font.ITALIC, 13));
 		btnNewButton_2.setBounds(155, 510, 97, 23);
 		frame.getContentPane().add(btnNewButton_2);
-		
+
 		JButton btnNewButton = new JButton("MY PAGE");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -98,45 +101,46 @@ public class g_main {
 		btnNewButton.setFont(new Font("Book Antiqua", Font.BOLD, 12));
 		btnNewButton.setBounds(297, 80, 97, 23);
 		frame.getContentPane().add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("\uD604\uD669 \uC870\uD68C");
 		btnNewButton_1.setFont(new Font("Mapo한아름", Font.PLAIN, 20));
 		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, " 접수내역을 확인합니다. " );
+				JOptionPane.showMessageDialog(null, " 접수내역을 확인합니다. ");
 				frame.dispose();
 				g_plz gp = new g_plz(dto);
 			}
-			
+
 		});
 		btnNewButton_1.setBounds(61, 136, 291, 59);
 		frame.getContentPane().add(btnNewButton_1);
-		
+
 		JButton button = new JButton("\uC21C\uCC30 \uB8E8\uD2B8 \uD655\uC778");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				g_route gr =  new g_route(dto);
+				g_route gr = new g_route(dto);
 			}
 		});
 		button.setFont(new Font("Mapo한아름", Font.PLAIN, 20));
 		button.setBackground(Color.WHITE);
 		button.setBounds(61, 205, 291, 59);
 		frame.getContentPane().add(button);
-		
+
 		JButton button_1 = new JButton("방범대원 조회");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				g_guard gf = new g_guard(dto);
-;			}
+				;
+			}
 		});
 		button_1.setFont(new Font("Mapo한아름", Font.PLAIN, 20));
 		button_1.setBackground(Color.WHITE);
 		button_1.setBounds(61, 274, 291, 59);
 		frame.getContentPane().add(button_1);
-		
+
 		JButton button_2 = new JButton("\uC77C\uBC18\uD68C\uC6D0 \uBA85\uB2E8");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,13 +152,18 @@ public class g_main {
 		button_2.setBackground(Color.WHITE);
 		button_2.setBounds(61, 346, 291, 59);
 		frame.getContentPane().add(button_2);
-		
+
 		JButton button_3 = new JButton("\uAC00\uC785 \uB300\uAE30\uC790");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				identify identify = new identify(dto);
+				if (!dto.getId().equals("admin")) {
+					JOptionPane.showMessageDialog(null, "관리자만 접근가능합니다.");
+					
+				} else {					
+					frame.dispose();
+					k_gaip kg = new k_gaip(dto);
 				}
+			}
 		});
 		button_3.setFont(new Font("Dialog", Font.PLAIN, 20));
 		button_3.setBackground(Color.WHITE);

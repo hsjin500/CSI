@@ -65,12 +65,12 @@ public class g_mia {
        frame.getContentPane().setLayout(null);
        
        past_id = new JTextField();
-       past_id.setBounds(156, 449, 183, 21);
+       past_id.setBounds(201, 449, 183, 21);
        frame.getContentPane().add(past_id);
        past_id.setColumns(10);
        
        JScrollPane scrollPane = new JScrollPane();
-       scrollPane.setBounds(12, 10, 1141, 417);
+       scrollPane.setBounds(12, 54, 1141, 373);
        frame.getContentPane().add(scrollPane);
        
       
@@ -109,9 +109,9 @@ public class g_mia {
        
    
        
-       JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514\uB97C \uC785\uB825\uD558\uC138\uC694");
+       JLabel lblNewLabel = new JLabel("접수자 아이디를 입력하세요.");
        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-       lblNewLabel.setBounds(12, 452, 150, 15);
+       lblNewLabel.setBounds(12, 452, 177, 15);
        frame.getContentPane().add(lblNewLabel);
        
 
@@ -125,6 +125,34 @@ public class g_mia {
        });
        button.setBounds(1027, 437, 126, 44);
        frame.getContentPane().add(button);
+       
+       JButton btnNewButton_1 = new JButton("\uC804\uCCB4 \uC870\uD68C");
+       btnNewButton_1.addActionListener(new ActionListener() {
+       	public void actionPerformed(ActionEvent e) {
+            
+            
+            String[] colName = {"아이디","위치","시간","날짜","인상착의","사진","신청날짜","진행상황"};
+              DBDAO dao = new DBDAO();
+           ArrayList<mia_DTO> arr = dao.miaAll();
+           Object[][] data = new Object[arr.size()][8];
+           for(int i = 0 ; i <data.length; i++) {
+              data[i][0]=arr.get(i).getId();
+              data[i][1]=arr.get(i).getLocation();
+              data[i][2]=arr.get(i).getTime();
+              data[i][3]=arr.get(i).getDate();
+              data[i][4]=arr.get(i).getInfo();
+              data[i][5]=arr.get(i).getPhoto();
+              data[i][6]=arr.get(i).getUpload_date();
+              data[i][7]=arr.get(i).getCondition();
+              
+           }
+           table = new JTable(data,colName);
+            scrollPane.setViewportView(table);
+        }
+       	
+       });
+       btnNewButton_1.setBounds(1003, 10, 150, 34);
+       frame.getContentPane().add(btnNewButton_1);
 
 
    }

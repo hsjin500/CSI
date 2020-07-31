@@ -105,7 +105,7 @@ public class request {
       btnNewButton.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             
-            String id = req_id.getText();
+            String id = dto.getId();
             String time = req_time.getText();
             String date = req_date.getText();
             String location = req_location.getText();
@@ -177,9 +177,11 @@ public class request {
       frame.getContentPane().add(label);
       
       req_id = new JTextField();
+      req_id.setEditable(false);
       req_id.setColumns(10);
       req_id.setBackground(Color.WHITE);
       req_id.setBounds(181, 70, 207, 30);
       frame.getContentPane().add(req_id);
+      req_id.setText(dto.getId());
    }
 }

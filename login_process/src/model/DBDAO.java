@@ -295,6 +295,49 @@ public class DBDAO {
 		return cnt;
 	}
 	
+	public int modify2(String email, String phoneNum, String id) {
+		int cnt = 0;
+
+		init();
+		String sql = "update clients set client_email = ? , phone_number = ? where client_id = ? ";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, phoneNum);
+			pstmt.setString(3, id);
+			cnt = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return cnt;
+	}
+	
+	public int modify3(String sosok, String id) {
+		int cnt = 0;
+
+		init();
+		String sql = "update clients set guard = ?  where client_id = ? ";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sosok);
+			pstmt.setString(2, id);
+			cnt = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return cnt;
+	}
+	
 	public int request(String id, String time, String date, String location, String ask) {
 	      int cnt = 0;
 
@@ -321,4 +364,90 @@ public class DBDAO {
 
 	      return cnt;
 	   }
+	
+	   public int mia(String id, String location, String date, String time, String ask, String photo) {
+	         int cnt = 0;
+
+	         init();
+	         String sql = "insert into mia values(?, ?, ?,?,?,?,sysdate,'ม๘วเม฿')";
+
+	         try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setNString(1, id);
+	            pstmt.setNString(2, location);
+	            pstmt.setNString(3, time);
+	            pstmt.setNString(4, date);
+	            pstmt.setNString(5, ask);
+	            pstmt.setNString(6, photo);
+
+	            cnt = pstmt.executeUpdate();
+
+	         } catch (SQLException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	         } finally {
+	            close();
+
+	         }
+
+	         return cnt;
+	      }
+	   
+	   public ArrayList<mia_DTO> miaAll() {
+			ArrayList<mia_DTO> arr = new ArrayList<mia_DTO>();
+
+			init();
+			String sql = "select * from mia";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					String mia_id = rs.getNString(1);
+					String location = rs.getNString(2);
+					String time = rs.getNString(3);
+					String date = rs.getNString(4);
+					String info = rs.getNString(5);
+					String photo = rs.getNString(6);
+					String upload_date = rs.getNString(7);
+					String condition = rs.getNString(8);
+
+					arr.add(new mia_DTO(mia_id, location, time, date, info, photo, upload_date, condition));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return arr;
+
+		}
+	   
+	   public ArrayList<Req_DTO> reqAll() {
+			ArrayList<Req_DTO> arr = new ArrayList<Req_DTO>();
+
+			init();
+			String sql = "select * from request";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					String req_id = rs.getNString(1);
+					String location = rs.getNString(2);
+					String time = rs.getNString(3);
+					String date = rs.getNString(4);
+					String ask = rs.getNString(5);
+					String upload_date = rs.getNString(6);
+
+					arr.add(new Req_DTO(req_id, location, time, date, ask, upload_date));
+
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return arr;
+		}
 }

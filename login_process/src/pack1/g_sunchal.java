@@ -68,7 +68,7 @@ public class g_sunchal {
 		req_id.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 10, 1141, 417);
+		scrollPane.setBounds(12, 66, 1141, 361);
 		frame.getContentPane().add(scrollPane);
 
 		JButton btnNewButton = new JButton("\uC870\uD68C");
@@ -110,6 +110,30 @@ public class g_sunchal {
 		});
 		button.setBounds(1027, 437, 126, 44);
 		frame.getContentPane().add(button);
+		
+		JButton btnNewButton_1 = new JButton("\uC804\uCCB4 \uC870\uD68C");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String[] colName = { "아이디", "위치", "시간", "날짜", "요청내용", "업로드 날짜" };
+				DBDAO dao = new DBDAO();
+				ArrayList<Req_DTO> ar = dao.reqAll();
+				Object[][] data = new Object[ar.size()][6];
+				for (int i = 0; i < data.length; i++) {
+					data[i][0] = ar.get(i).getId();
+					data[i][1] = ar.get(i).getLocatino();
+					data[i][2] = ar.get(i).getTime();
+					data[i][3] = ar.get(i).getDate();
+					data[i][4] = ar.get(i).getAsk();
+					data[i][5] = ar.get(i).getUpload_date();
+				}
+
+				table = new JTable(data, colName);
+				scrollPane.setViewportView(table);
+			}
+			
+		});
+		btnNewButton_1.setBounds(1027, 10, 126, 46);
+		frame.getContentPane().add(btnNewButton_1);
 
 	}
 }

@@ -31,7 +31,7 @@ public class loginDistrubution {
 		}
 		System.out.println("guard°ª : " + guardCheck);
 
-		if (guardCheck.equals("1")) {
+		if (!guardCheck.equals("0")) {
 			return true;
 		} else {
 			return false;
