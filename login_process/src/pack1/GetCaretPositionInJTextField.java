@@ -50,7 +50,7 @@ public class GetCaretPositionInJTextField extends JApplet implements CaretListen
 		 */
 		try {
 			int position = e.getDot();
-			System.out.println("현재 커서 위치 : "+position);
+//			System.out.println("현재 커서 위치 : "+position);
 			if (e.getDot() == 2) {
 				
 				UISignup.animation1.setIcon(new javax.swing.ImageIcon("src\\pack2\\1.png")); // 타이핑 위치에 따라서 그림 바뀌는거
@@ -59,7 +59,7 @@ public class GetCaretPositionInJTextField extends JApplet implements CaretListen
 			} else if (e.getDot() == 4) {
 				UISignup.animation1.setIcon(new javax.swing.ImageIcon("src\\pack2\\2.png"));
 				UISignup.animation2.setIcon(new javax.swing.ImageIcon("src\\pack2\\robber1.png"));
-			} else if (e.getDot() == 8) {
+			} else if (e.getDot() == 7) {
 				UISignup.animation1.setIcon(new javax.swing.ImageIcon("src\\pack2\\3.png"));
 				UISignup.animation2.setIcon(new javax.swing.ImageIcon("src\\pack2\\robber2.png"));
 			}

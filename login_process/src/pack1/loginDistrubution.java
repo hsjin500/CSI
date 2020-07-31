@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import model.DBDAO;
+
 public class loginDistrubution {
 	public static boolean isGuard(String Id) {
 		String id = Id;

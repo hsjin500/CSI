@@ -24,11 +24,13 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
 import AppPackage.AnimationClass;
+import model.DBDAO;
+import model.DBDTO;
 import pack2.AbsoluteConstraints;
 
 public class UISignup extends javax.swing.JFrame {
 	private String id, pw, name, phoneNumber, email;
-
+	
 	public UISignup() {  //main 에서 넘어와서 UIsignup메소드 실행하고 --> //initComponents();들어있음(실행)
 		initComponents();
 		// Next Two Lines will display the Frame into the middle of the Screen
@@ -453,8 +455,10 @@ public class UISignup extends javax.swing.JFrame {
 		}
 	}
 
+	
 	private void IDTextFieldFocusLost(java.awt.event.FocusEvent evt) {
 		id = IDTextField.getText();
+		
 		if (!pc.isId(id) && SignupBtn.getX()==1030) {//아이디 확인하고 && 회원가입 상태일때.
 			idTry = 0;
 			Mark1.setVisible(true);
@@ -560,8 +564,9 @@ public class UISignup extends javax.swing.JFrame {
 				CheckLogin cl = new CheckLogin();
 				if (check && !cl.checkId(id)) {//검색해서 있으면 true 즉, !false --> 검색해서 없는것(중복아님)
 					// 맞으면 데이터 insert
-					String sql = "insert into clients(client_id, client_pw, client_name, phone_number, client_email, signup_date, guard) "
-							+ "values('" + id + "', '" + pw + "', '" + name + "','" + phoneNumber + "' , '" + email	+ "', sysdate, '0')";
+					String sql = "insert into clients(client_id, client_pw, client_name, phone_number, client_email, ss_number, guard, manager) "
+							+ "values('" + id + "', '" + pw + "', '" + name + "','" + phoneNumber + "' , '" + email	+ "', null, '0', null)";
+					
 					System.out.println(sql);
 					DBDAO.executeSqlUpdate(sql);
 
@@ -593,17 +598,37 @@ public class UISignup extends javax.swing.JFrame {
 		if(check) {
 			System.out.println("로그인 성공");
 			
+			DBDAO dao = new DBDAO();
+			String id = IDTextField.getText();
+			String pw = PWField.getText();
+			DBDTO dto = dao.loginSelect(id,pw);
+			
 				if(id.equals("admin")) {
 					//관리자 전용 클래스(화면)로 넘어가게 생성자 추가
 					JOptionPane.showMessageDialog(null, "관리자님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
+					this.dispose();
+					g_main g_main = new g_main(dto);
 				}else if(ld.isGuard(id)) {
 					//방범대 전용 클래스(화면)로 넘어가게
 					JOptionPane.showMessageDialog(null, "방범대원님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
+					this.dispose();
+					g_main g_main = new g_main(dto);
 				}else {
 					//일반인 전용 클래스(화면)로 넘어가게
 					JOptionPane.showMessageDialog(null, ld.userName(id)+"님 환영합니다", "로그인", JOptionPane.INFORMATION_MESSAGE);
+					this.dispose();
+					c_main cm = new c_main(dto);
+					
 				}
-			this.dispose();//로그인 성공했기 때문에 창 지운다.
+//	      		if(dto == null) {//정보가 없으면 로그인 실패
+//	      			//다이얼로그 띄우기
+//	      			JOptionPane.showMessageDialog(null, "로그인 실패", "로그인", JOptionPane.ERROR_MESSAGE);
+//	      			PWField.setText("");}
+//	      		else {
+//	      			this.dispose();//로그인 성공했기 때문에 창 지운다.
+//	      			c_main cm = new c_main(dto);
+//	      		}	
+				
 //----------------------------------로그인 실패시---------------------------			
 		}else {
 			System.out.println("로그인 실패");
@@ -751,6 +776,8 @@ public class UISignup extends javax.swing.JFrame {
 			}
 		});
 	}
+	
+	
 
 	// Variables declaration - do not modify//
 	private javax.swing.JTextField IDTextField;
