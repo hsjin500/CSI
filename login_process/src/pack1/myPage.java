@@ -87,8 +87,11 @@ public class myPage {
 		Btn_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				if(dto.getGuard().equals("0")) {
 				c_main cm = new c_main(dto);
-
+				}else {
+				g_main gm = new g_main(dto);
+				}
 			}
 		});
 		Btn_5.setBounds(12, 236, 264, 36);
